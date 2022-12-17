@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -33,15 +34,16 @@ public class GoombaEntity extends Monster implements IAnimatable {
 
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 5.0D)
-                .add(Attributes.ATTACK_DAMAGE, 2.0f)
+                .add(Attributes.MAX_HEALTH, 3.0D)
+                .add(Attributes.ATTACK_DAMAGE, 1.0f)
                 .add(Attributes.ATTACK_SPEED, 2.0f)
-                .add(Attributes.MOVEMENT_SPEED, 0.3f).build();
+                .add(Attributes.MOVEMENT_SPEED, 0.15f).build();
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 2, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
 
 
@@ -68,29 +70,28 @@ public class GoombaEntity extends Monster implements IAnimatable {
         return 0.2F;
     }
 
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
+        if (event.isMoving() && this.getSpeed() < .3) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.walk", true));
+            animationSpeed=500;
             return PlayState.CONTINUE;
         }
 
+        if (event.isMoving() && this.getSpeed() >=.3 ) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.run", true));
+            return PlayState.CONTINUE;
+        }
+
+
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.idle", true));
         return PlayState.CONTINUE;
     }
 
-   // @Override
-   // public void registerControllers(AnimationData data) {
-   //     data.addAnimationController(new AnimationController(this, "controller",
-   //             0, this::predicate));
-   // }
-//
-   // @Override
-   // public void registerControllers(AnimationData data) {
-//
-   // }
-
     @Override
     public void registerControllers(AnimationData data) {
-
+        data.addAnimationController(new AnimationController(this, "controller",
+                0, this::predicate));
     }
 
     @Override
