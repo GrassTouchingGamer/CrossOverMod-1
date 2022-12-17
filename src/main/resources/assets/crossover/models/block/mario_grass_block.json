@@ -1,0 +1,13 @@
+
+{
+	"parent": "block/cube",
+	"textures": {
+		"down": "crossover:block/mario_dirt_block",
+		"up": "crossover:block/mario_grass_top",
+		"north": "crossover:block/mario_grass_block",
+		"east": "crossover:block/mario_grass_block",
+		"south": "crossover:block/mario_grass_block",
+		"west": "crossover:block/mario_grass_block",
+		"particle": "crossover:block/mario_grass_block"
+	}
+}

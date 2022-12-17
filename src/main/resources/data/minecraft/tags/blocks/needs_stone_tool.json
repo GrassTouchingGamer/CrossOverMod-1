@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "crossover:mario_grass_block",
+    "crossover:mario_dirt_block"
+  ]
+}
