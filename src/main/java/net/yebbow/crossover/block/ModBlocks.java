@@ -1,5 +1,7 @@
 package net.yebbow.crossover.block;
 
+import net.minecraft.world.level.block.DirtPathBlock;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.yebbow.crossover.Crossovermod;
@@ -20,9 +22,9 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, Crossovermod.MOD_ID);
 
     public static final RegistryObject<Block> MARIO_GRASS_BLOCK = registerBlock("mario_grass_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.DIRT).strength(3f).destroyTime(1f)), CreativeModeTab.TAB_MISC);
+            () -> new GrassBlock(BlockBehaviour.Properties.of(Material.DIRT).strength(3f).destroyTime(1f)), CreativeModeTab.TAB_MISC);
     public static final RegistryObject<Block> MARIO_DIRT_BLOCK = registerBlock("mario_dirt_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.DIRT)
+            () -> new DirtPathBlock(BlockBehaviour.Properties.of(Material.DIRT)
                     .strength(3f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
 
 

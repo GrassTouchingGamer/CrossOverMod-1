@@ -3,12 +3,11 @@ package net.yebbow.crossover.entity.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -16,6 +15,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegistryObject;
+import net.yebbow.sound.ModSounds;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -23,6 +25,8 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+import javax.annotation.Nullable;
 
 public class GoombaEntity extends Monster implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
@@ -41,48 +45,56 @@ public class GoombaEntity extends Monster implements IAnimatable {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 2, false));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
 
-
     }
 
 
+
+
+    protected SoundEvent getStepSound() {
+        return ModSounds.GOOMBA_STEP.get();
+    }
+
+    @Override
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, 0.15F, 1.0F);
+        this.playSound(this.getStepSound(), 0.15F, 1.0F);
     }
 
+
+    @Nullable
+    @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.CAT_STRAY_AMBIENT;
+        return ModSounds.GOOMBA_AMBIENT.get();
     }
 
+    @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.DOLPHIN_HURT;
+        return ModSounds.GOOMBA_HURT.get();
     }
 
+    @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.DOLPHIN_DEATH;
+        return ModSounds.GOOMBA_DEATH.get();
     }
-
     protected float getSoundVolume() {
         return 0.2F;
     }
 
+    /* ANIMATIONS */
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving() && this.getSpeed() < .3) {
+        if (event.isMoving()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.walk", true));
-            animationSpeed=500;
             return PlayState.CONTINUE;
         }
-
-        if (event.isMoving() && this.getSpeed() >=.3 ) {
+        if (isSprinting()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.run", true));
             return PlayState.CONTINUE;
         }
-
 
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.idle", true));
         return PlayState.CONTINUE;

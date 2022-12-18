@@ -1,0 +1,24 @@
+{
+  "entity.goomba.step": {
+    "sounds": [
+      "crossover:entity/goomba/step",
+      "crossover:entity/goomba/step2"
+    ]
+  },
+  "entity.goomba.ambient": {
+    "sounds": [
+      "crossover:entity/goomba/ambient",
+      "crossover:entity/goomba/ambient2"
+    ]
+  },
+  "entity.goomba.hurt": {
+    "sounds": [
+      "crossover:entity/goomba/hurt"
+    ]
+  },
+  "entity.goomba.death": {
+    "sounds": [
+      "crossover:entity/goomba/death"
+    ]
+  }
+}
