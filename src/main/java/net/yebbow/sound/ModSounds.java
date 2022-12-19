@@ -13,14 +13,14 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Crossovermod.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> GOOMBA_STEP = registerSound("entity.goomba.step");
-    public static RegistryObject<SoundEvent> GOOMBA_AMBIENT = registerSound("entity.goomba.ambient");
-    public static RegistryObject<SoundEvent> GOOMBA_HURT = registerSound("entity.goomba.hurt");
-    public static RegistryObject<SoundEvent> GOOMBA_DEATH = registerSound("entity.goomba.death");
+    public static final RegistryObject<SoundEvent> GOOMBA_STEP = registerSoundEvent("entity.goomba.step");
+    public static RegistryObject<SoundEvent> GOOMBA_AMBIENT = registerSoundEvent("entity.goomba.ambient");
+    public static RegistryObject<SoundEvent> GOOMBA_HURT = registerSoundEvent("entity.goomba.hurt");
+    public static RegistryObject<SoundEvent> GOOMBA_DEATH = registerSoundEvent("entity.goomba.death");
 
 
 
-    private static RegistryObject<SoundEvent> registerSound(String name) {
+    private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         ResourceLocation id = new ResourceLocation(Crossovermod.MOD_ID, name);
         return SOUND_EVENTS.register(name, () -> new SoundEvent(id));
     }

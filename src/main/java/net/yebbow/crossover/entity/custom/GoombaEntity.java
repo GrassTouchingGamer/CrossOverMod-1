@@ -26,7 +26,6 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
 
 public class GoombaEntity extends Monster implements IAnimatable {
     private AnimationFactory factory = new AnimationFactory(this);
@@ -65,7 +64,6 @@ public class GoombaEntity extends Monster implements IAnimatable {
     }
 
 
-    @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         return ModSounds.GOOMBA_AMBIENT.get();
