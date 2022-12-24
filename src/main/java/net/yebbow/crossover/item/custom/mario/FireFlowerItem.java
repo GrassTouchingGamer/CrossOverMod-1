@@ -2,7 +2,6 @@ package net.yebbow.crossover.item.custom.mario;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.yebbow.crossover.entity.custom.FireBallEntity;
 
