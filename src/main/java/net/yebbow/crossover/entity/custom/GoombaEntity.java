@@ -2,8 +2,6 @@ package net.yebbow.crossover.entity.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -15,8 +13,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
 import net.yebbow.sound.ModSounds;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -54,14 +50,14 @@ public class GoombaEntity extends Monster implements IAnimatable {
 
 
 
-    protected SoundEvent getStepSound() {
-        return ModSounds.GOOMBA_STEP.get();
-    }
+   protected SoundEvent getStepSound() {
+       return ModSounds.GOOMBA_STEP.get();
+   }
 
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(this.getStepSound(), 0.15F, 1.0F);
-    }
+   @Override
+   protected void playStepSound(BlockPos pos, BlockState blockIn) {
+       this.playSound(this.getStepSound(), 0.15F, 1.0F);
+   }
 
 
     @Override

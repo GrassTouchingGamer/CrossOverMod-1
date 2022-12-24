@@ -1,4 +1,4 @@
-package net.yebbow.crossover.entity.client;
+package net.yebbow.crossover.entity.client.goomba;
 
 import net.minecraft.resources.ResourceLocation;
 import net.yebbow.crossover.Crossovermod;

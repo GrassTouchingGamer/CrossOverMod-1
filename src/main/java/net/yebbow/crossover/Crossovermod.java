@@ -17,9 +17,11 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yebbow.crossover.block.ModBlocks;
-import net.yebbow.crossover.entity.ModEntityTypes;
-import net.yebbow.crossover.entity.client.GoombaRenderer;
+import net.yebbow.crossover.entity.client.fireball.FireBallRenderer;
+import net.yebbow.crossover.entity.custom.ModEntityTypes;
+import net.yebbow.crossover.entity.client.goomba.GoombaRenderer;
 import net.yebbow.crossover.item.ModItems;
+import net.yebbow.sound.ModSounds;
 import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -47,6 +49,8 @@ public class Crossovermod {
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         ModEntityTypes.register(eventBus);
+        ModSounds.register(eventBus);
+
 
         GeckoLib.initialize();
 
@@ -61,6 +65,7 @@ public class Crossovermod {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         EntityRenderers.register(ModEntityTypes.GOOMBA.get(), GoombaRenderer::new);
+        EntityRenderers.register(ModEntityTypes.FIREBALL.get(), FireBallRenderer::new);
 
     }
 

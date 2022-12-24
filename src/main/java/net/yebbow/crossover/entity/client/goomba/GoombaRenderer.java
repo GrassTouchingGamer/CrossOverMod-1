@@ -1,4 +1,4 @@
-package net.yebbow.crossover.entity.client;
+package net.yebbow.crossover.entity.client.goomba;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
