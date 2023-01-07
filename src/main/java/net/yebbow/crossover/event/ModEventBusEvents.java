@@ -4,9 +4,8 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yebbow.crossover.Crossovermod;
-import net.yebbow.crossover.entity.custom.FireBallEntity;
-import net.yebbow.crossover.entity.custom.ModEntityTypes;
 import net.yebbow.crossover.entity.custom.GoombaEntity;
+import net.yebbow.crossover.entity.custom.ModEntityTypes;
 
 @Mod.EventBusSubscriber(modid = Crossovermod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {

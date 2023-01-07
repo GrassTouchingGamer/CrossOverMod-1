@@ -9,6 +9,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.yebbow.crossover.Crossovermod;
 
+import java.util.List;
+
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITIES, Crossovermod.MOD_ID);
@@ -18,10 +20,10 @@ public class ModEntityTypes {
                     .sized(0.5f, 0.5f)
                     .build(new ResourceLocation(Crossovermod.MOD_ID, "goomba").toString()));
 
-    public static final RegistryObject<EntityType<FireBallEntity>> FIREBALL = ENTITY_TYPES.register("fireball",
-            () -> EntityType.Builder.of(FireBallEntity::new, MobCategory.MISC)
-                    .sized(0.5f, 0.5f)
-                    .build(new ResourceLocation(Crossovermod.MOD_ID, "fireball").toString()));
+   public static final RegistryObject<EntityType<FireBallEntity>> FIREBALL = ENTITY_TYPES.register("fireball",
+           () -> EntityType.Builder.<FireBallEntity>of(FireBallEntity::new, MobCategory.MISC)
+                   .sized(0.5f, 0.5f)
+                   .build(new ResourceLocation(Crossovermod.MOD_ID, "fireball").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

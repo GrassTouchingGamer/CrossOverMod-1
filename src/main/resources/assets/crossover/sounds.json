@@ -20,5 +20,16 @@
     "sounds": [
       "crossover:entity/goomba/death"
     ]
+  },
+ "fireball.bounce": {
+   "sounds": [
+     "crossover:entity/fireball/bounce"
+   ]
+ },
+  "fireball.hit": {
+    "sounds": [
+      "crossover:entity/fireball/hit"
+    ]
   }
+
 }

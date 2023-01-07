@@ -3,28 +3,9 @@
 	"animations": {
 		"animation.ball.flip": {
 			"loop": true,
-			"animation_length": 0.33333,
 			"bones": {
 				"ball": {
-					"rotation": {
-						"0.0": {
-							"vector": [0, 0, 0]
-						},
-						"0.3333": {
-							"vector": [180, 0, 0]
-						}
-					},
-					"position": {
-						"0.0": {
-							"vector": [0, -1, 0]
-						},
-						"0.1667": {
-							"vector": [0, 8.5, 8]
-						},
-						"0.3333": {
-							"vector": [0, 16, 0]
-						}
-					}
+					"scale": 0.9
 				}
 			}
 		}

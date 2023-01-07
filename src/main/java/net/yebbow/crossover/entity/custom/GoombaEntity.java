@@ -50,14 +50,14 @@ public class GoombaEntity extends Monster implements IAnimatable {
 
 
 
-   protected SoundEvent getStepSound() {
-       return ModSounds.GOOMBA_STEP.get();
-   }
+    protected SoundEvent getStepSound() {
+        return ModSounds.GOOMBA_STEP.get();
+    }
 
-   @Override
-   protected void playStepSound(BlockPos pos, BlockState blockIn) {
-       this.playSound(this.getStepSound(), 0.15F, 1.0F);
-   }
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState blockIn) {
+        this.playSound(this.getStepSound(), 0.15F, 1.0F);
+    }
 
 
     @Override
