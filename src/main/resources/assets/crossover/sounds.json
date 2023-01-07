@@ -30,6 +30,11 @@
     "sounds": [
       "crossover:entity/fireball/hit"
     ]
+  },
+  "fireflower.use": {
+    "sounds": [
+      "crossover:item/fireflower/blup"
+    ]
   }
 
 }

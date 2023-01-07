@@ -18,6 +18,7 @@ public class ModSounds {
     public static RegistryObject<SoundEvent> GOOMBA_DEATH = registerSoundEvent("goomba.death");
     public static RegistryObject<SoundEvent> FIREBALL_BOUNCE = registerSoundEvent("fireball.bounce");
     public static RegistryObject<SoundEvent> FIREBALL_HIT = registerSoundEvent("fireball.hit");
+    public static RegistryObject<SoundEvent> FIREFLOWER_USE = registerSoundEvent("fireflower.use");
 
 
 

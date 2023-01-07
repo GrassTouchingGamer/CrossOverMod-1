@@ -16,7 +16,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, Crossovermod.MOD_ID);
 
   public static final RegistryObject<Item> FIRE_FLOWER = ITEMS.register("fire_flower",
-          () -> new FireFlowerItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+          () -> new FireFlowerItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
 
     public static final RegistryObject<ForgeSpawnEggItem> GOOMBA_SPAWN_EGG = ITEMS.register("goomba_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.GOOMBA, 0x948e8d, 0x3b3635,

@@ -15,19 +15,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.yebbow.sound.ModSounds;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class FireBallEntity extends ThrowableProjectile implements IAnimatable {
+public class FireBallEntity extends ThrowableProjectile {
 
 
-   private AnimationFactory factory = new AnimationFactory(this);
-   private AnimationData data;
+  //private AnimationFactory factory = new AnimationFactory(this);
+  //private AnimationData data;
     private SoundEvent soundEvent = this.getDefaultHitGroundSoundEvent();
     private SoundEvent soundEvent2 = this.getEntityHitSound();
     protected SoundEvent getDefaultHitGroundSoundEvent() {
@@ -63,7 +56,7 @@ public class FireBallEntity extends ThrowableProjectile implements IAnimatable {
         double d6 = vec3.y;
         double d1 = vec3.z;
         for (int i = 0; i < 4; ++i) {
-            this.level.addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+            this.level.addParticle(ParticleTypes.FLAME, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
             }
         }
 
@@ -100,20 +93,20 @@ public class FireBallEntity extends ThrowableProjectile implements IAnimatable {
 
     /* ANIMATIONS */
 
-   private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+  //private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
 
-       event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ball.flip", true));
-       return PlayState.CONTINUE;
-   }
+  //    event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ball.flip", true));
+  //    return PlayState.CONTINUE;
+  //}
 
-   @Override
-   public void registerControllers(AnimationData data) {
-       data.addAnimationController(new AnimationController(this, "controller",
-               0, this::predicate));
-   }
+  //@Override
+  //public void registerControllers(AnimationData data) {
+  //    data.addAnimationController(new AnimationController(this, "controller",
+  //            0, this::predicate));
+  //}
 
-   @Override
-   public AnimationFactory getFactory() {
-        return factory;
-    }
+  //@Override
+  //public AnimationFactory getFactory() {
+   //     return factory;
+    //}
 }
