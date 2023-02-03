@@ -35,6 +35,46 @@
     "sounds": [
       "crossover:item/fireflower/blup"
     ]
+  },
+  "top.g": {
+    "sounds": [
+      {
+        "name": "crossover:item/disc/tourner",
+        "stream": true
+      }
+    ]
+  },
+  "coin.collect": {
+    "sounds": [
+      {
+        "name": "crossover:item/coin",
+        "stream": true
+      }
+    ]
+  },
+  "question.activate": {
+    "sounds": [
+      {
+        "name": "crossover:block/question/activate",
+        "stream": true
+      }
+    ]
+  },
+  "question.bump": {
+    "sounds": [
+      {
+        "name": "crossover:block/question/bump",
+        "stream": true
+      }
+    ]
+  },
+  "question.step": {
+    "sounds": [
+      {
+        "name": "crossover:block/question/step",
+        "stream": true
+      }
+    ]
   }
 
 }

@@ -3,5 +3,6 @@
   "values": [
     "crossover:mario_grass_block",
     "crossover:mario_dirt_block"
+    "crossover:empty_block"
   ]
 }

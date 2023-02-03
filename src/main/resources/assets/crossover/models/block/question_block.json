@@ -1,0 +1,14 @@
+
+{
+	"parent": "block/cube",
+	"textures": {
+		"down": "crossover:block/question_block_top",
+		"up": "crossover:block/question_block_top",
+		"north": "crossover:block/question_block",
+		"east": "crossover:block/question_block",
+		"south": "crossover:block/question_block",
+		"west": "crossover:block/question_block",
+		"particle": "crossover:block/particleremover"
+
+	}
+}

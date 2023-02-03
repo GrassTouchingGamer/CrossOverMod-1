@@ -13,7 +13,12 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.yebbow.crossover.block.mario.EmptyBlock;
+import net.yebbow.crossover.block.mario.QuestionBlock;
+import net.yebbow.crossover.block.mario.QuestionMultiHitBlock;
+import net.yebbow.crossover.block.mario.questionblock.UnderGroundBlock;
 import net.yebbow.crossover.item.ModItems;
+import net.yebbow.sound.ModSounds;
 
 import java.util.function.Supplier;
 
@@ -27,6 +32,15 @@ public class ModBlocks {
             () -> new DirtPathBlock(BlockBehaviour.Properties.of(Material.DIRT)
                     .strength(3f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_MISC);
 
+    public static final RegistryObject<Block> QUESTION_BLOCK = registerBlock("question_block",
+            () -> new QuestionBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion().sound(ModSounds.QUESTIONABLE_SOUND)),
+            CreativeModeTab.TAB_MISC);
+
+    public static final RegistryObject<Block> UNDERGROUND = registerBlock("under_ground_question_block",
+            () -> new UnderGroundBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), CreativeModeTab.TAB_MISC);
+
+    public static final RegistryObject<Block> EMPTY_BLOCK = registerBlock("empty_block",
+            () -> new EmptyBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.1f, 5f).requiresCorrectToolForDrops().noOcclusion()),CreativeModeTab.TAB_MISC);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
@@ -35,8 +49,7 @@ public class ModBlocks {
         return toReturn;
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
-                                                                            CreativeModeTab tab) {
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
                 new Item.Properties().tab(tab)));
     }

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "crossover:block/empty_block" }
+  }
+}

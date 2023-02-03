@@ -1,11 +1,16 @@
 {
   "block.crossover.mario_grass_block": "Mario Grass Block",
   "block.crossover.mario_dirt_block": "Mario Dirt Block",
+  "block.crossover.question_block": "Question Block",
+  "block.crossover.empty_block": "Empty Block",
 
 
   "item.crossover.fire_flower": "Fire Flower",
   "item.crossover.goomba_spawn_egg": "Goomba Spawn Egg",
+  "item.crossover.coin": "Coin",
 
+  "item.crossover.top_g_music_disc": "What Color Is Your Music Disc?",
+  "item.crossover.top_g_music_disc.desc": "Indila - Tourner Dans Le Vide",
 
   "entity.crossover.goomba": "Goomba",
   "entity.crossover.fireball": "FireBall"

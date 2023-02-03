@@ -47,25 +47,35 @@ public class FireBallEntity extends ThrowableProjectile {
     protected void defineSynchedData() {
 
     }
+
+
+    @Override
+    public boolean isInWater() {
+        return false;
+    }
     public void tick() {
         super.tick();
-
         Vec3 vec3;
         vec3 = this.getDeltaMovement();
         double d5 = vec3.x;
         double d6 = vec3.y;
         double d1 = vec3.z;
         for (int i = 0; i < 4; ++i) {
-            this.level.addParticle(ParticleTypes.FLAME, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
-            }
+            this.level.addParticle(ParticleTypes.FLAME, this.getX() + d5 * (double) i / 4.0D, this.getY() + d6 * (double) i / 4.0D, this.getZ() + d1 * (double) i / 4.0D, -d5, -d6 + 0.2D, -d1);
         }
+    }
+
+
+
+
 
 
     protected void onHitEntity(EntityHitResult damage) {
         super.onHitEntity(damage);
         Entity entity = damage.getEntity();
+        if (!entity.fireImmune()) {
         damage.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 5.0F);
-        entity.setSecondsOnFire(5);
+        entity.setSecondsOnFire(5); }
         this.discard();
         this.playSound(this.soundEvent2, 1.0F, 1.2F);
     }
@@ -87,6 +97,8 @@ public class FireBallEntity extends ThrowableProjectile {
 
         }
     }
+
+
 
 
 
