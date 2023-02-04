@@ -1,7 +1,6 @@
 package net.yebbow.crossover.block.mario.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
@@ -9,13 +8,20 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.yebbow.crossover.block.ModBlockEntities;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class QuestionBlockEntity extends BlockEntity implements Clearable{
+import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes.PLAY_ONCE;
 
+public class QuestionBlockEntity extends BlockEntity implements Clearable, IAnimatable{
+
+    public int animate=0;
     private ItemStack stack = ItemStack.EMPTY;
-
 
     public QuestionBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(ModBlockEntities.QUESTION_BLOCK.get(), pWorldPosition, pBlockState);
@@ -26,7 +32,6 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable{
         if (!this.getStack().isEmpty()) {
             pTag.put("Stack", this.getStack().save(new CompoundTag()));
         }
-
     }
 
     public void load(CompoundTag pTag) {
@@ -37,6 +42,9 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable{
 
     }
 
+    public void setAnimate() {
+        this.animate=1;
+    }
 
     public ItemStack getStack() {
         return this.stack;
@@ -52,5 +60,25 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable{
     @Override
     public void clearContent() {
         this.setStack(ItemStack.EMPTY);
+    }
+
+    AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
+
+    private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
+        if(this.animate==1) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.question.bump", PLAY_ONCE));
+        }
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController(this, "controller", 1, this::predicate));
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return factory;
     }
 }

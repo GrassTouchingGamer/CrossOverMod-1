@@ -11,29 +11,22 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.yebbow.crossover.block.ModBlockEntities;
 import net.yebbow.crossover.block.ModBlocks;
 import net.yebbow.crossover.block.mario.entity.QuestionBlockEntity;
 import net.yebbow.crossover.item.ModItems;
 import net.yebbow.sound.ModSounds;
-import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class QuestionBlock extends BaseEntityBlock{
+public class QuestionBlock extends BaseEntityBlock {
     public QuestionBlock(Properties properties) {
         super(properties);
     }
-
-
-    @Nullable
-    @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new QuestionBlockEntity(pPos, pState);
+        return ModBlockEntities.QUESTION_BLOCK.get().create(pPos, pState);
     }
 
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
 
     }
 
@@ -44,6 +37,7 @@ public class QuestionBlock extends BaseEntityBlock{
             if (blockentity instanceof QuestionBlockEntity) {
                 QuestionBlockEntity questionBlockEntity = (QuestionBlockEntity) blockentity;
                 ItemStack itemstack = questionBlockEntity.getStack();
+                questionBlockEntity.setAnimate();
                 if (!itemstack.isEmpty()) {
                     if(!itemstack.is(ModItems.COIN.get())) {
                         this.summonitementity(pLevel, pPos);
@@ -51,9 +45,9 @@ public class QuestionBlock extends BaseEntityBlock{
                         pLevel.setBlockAndUpdate(pPos, ModBlocks.EMPTY_BLOCK.get().defaultBlockState());
                         pLevel.playSound((Player) null, pPos.getX(), pPos.getY(), pPos.getZ(), ModSounds.QUESTION_ACTIVATE.get(), SoundSource.NEUTRAL, 1F, 1F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
                     } else {
-
                         this.dropitemmultihit(pLevel, pPos);
                     }
+
                 }
             }
         }
@@ -100,7 +94,6 @@ public class QuestionBlock extends BaseEntityBlock{
         public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (!pState.is(pNewState.getBlock())) {
             this.dropitem(pLevel, pPos);
-
         }
     }
 

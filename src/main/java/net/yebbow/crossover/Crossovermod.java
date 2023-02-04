@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,6 +19,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yebbow.crossover.block.ModBlockEntities;
 import net.yebbow.crossover.block.ModBlocks;
+import net.yebbow.crossover.entity.client.block.question.QuestionBlockRenderer;
 import net.yebbow.crossover.entity.client.fireball.FireBallRenderer;
 import net.yebbow.crossover.entity.custom.ModEntityTypes;
 import net.yebbow.crossover.entity.client.goomba.GoombaRenderer;
@@ -39,11 +41,8 @@ public class Crossovermod {
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
 
@@ -57,20 +56,12 @@ public class Crossovermod {
         GeckoLib.initialize();
 
         eventBus.addListener(this::setup);
-        eventBus.addListener(this::clientSetup);
 
 
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
-
-    private void clientSetup(final FMLClientSetupEvent event) {
-        EntityRenderers.register(ModEntityTypes.GOOMBA.get(), GoombaRenderer::new);
-        EntityRenderers.register(ModEntityTypes.FIREBALL.get(), FireBallRenderer::new);
-
-    }
-
 
 
         private void setup(final FMLCommonSetupEvent event)
