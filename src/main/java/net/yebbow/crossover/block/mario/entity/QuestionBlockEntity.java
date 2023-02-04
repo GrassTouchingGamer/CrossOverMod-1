@@ -20,7 +20,9 @@ import static software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes
 
 public class QuestionBlockEntity extends BlockEntity implements Clearable, IAnimatable{
 
-    public int animate=0;
+    public boolean animated() {
+        return this.animated();
+    }
     private ItemStack stack = ItemStack.EMPTY;
 
     public QuestionBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
@@ -42,9 +44,6 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable, IAnim
 
     }
 
-    public void setAnimate() {
-        this.animate=1;
-    }
 
     public ItemStack getStack() {
         return this.stack;
@@ -56,7 +55,6 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable, IAnim
     }
 
 
-
     @Override
     public void clearContent() {
         this.setStack(ItemStack.EMPTY);
@@ -66,15 +64,17 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable, IAnim
 
 
     private <P extends IAnimatable> PlayState predicate(AnimationEvent<P> event) {
-        if(this.animate==1) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.question.bump", PLAY_ONCE));
+        if(this.animated()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.question.bump", true));
+            return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 1, this::predicate));
+        AnimationController<QuestionBlockEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
+        data.addAnimationController(controller);
     }
 
     @Override

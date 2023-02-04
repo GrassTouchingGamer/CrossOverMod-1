@@ -36,8 +36,8 @@ public class QuestionBlock extends BaseEntityBlock {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof QuestionBlockEntity) {
                 QuestionBlockEntity questionBlockEntity = (QuestionBlockEntity) blockentity;
+                ((QuestionBlockEntity) blockentity).animated();
                 ItemStack itemstack = questionBlockEntity.getStack();
-                questionBlockEntity.setAnimate();
                 if (!itemstack.isEmpty()) {
                     if(!itemstack.is(ModItems.COIN.get())) {
                         this.summonitementity(pLevel, pPos);
