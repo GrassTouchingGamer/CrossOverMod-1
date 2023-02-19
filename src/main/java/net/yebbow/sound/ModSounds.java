@@ -30,6 +30,8 @@ public class ModSounds{
     public static RegistryObject<SoundEvent> QUESTION_BUMP = registerSoundEvent("question.bump");
     public static RegistryObject<SoundEvent> QUESTION_STEP = registerSoundEvent("question.step");
     public static RegistryObject<SoundEvent> NULL = registerSoundEvent("");
+    public static RegistryObject<SoundEvent> CIGARS = registerSoundEvent("breathe.air");
+    public static RegistryObject<SoundEvent> PUSHUPS = registerSoundEvent("push.ups");
 
     public static final ForgeSoundType QUESTIONABLE_SOUND = new ForgeSoundType(1.0F, 1.0F,
             ModSounds.QUESTION_BUMP, ModSounds.QUESTION_STEP, ModSounds.NULL, ModSounds.NULL, ModSounds.QUESTION_BUMP);

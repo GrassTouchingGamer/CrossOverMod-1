@@ -1,0 +1,11 @@
+{
+  //"variants": {
+  //  "facing=up": { "model": "crossover:block/warp_pipe"},
+  //  "facing=north": { "model": "crossover:block/warp_pipe", "x": 90 },
+  //  "facing=east": { "model": "crossover:block/warp_pipe", "x": 90 , "y": 90 },
+  //  "facing=south": { "model": "crossover:block/warp_pipe", "x": 90 , "y": 180 },
+  //  "facing=west": { "model": "crossover:block/warp_pipe", "x": 90 , "y": 270 },
+  //  "facing=down": { "model": "crossover:block/warp_pipe", "x": 180}
+  //}
+  "": { "model": "crossover:block/warp_pipe" }
+}

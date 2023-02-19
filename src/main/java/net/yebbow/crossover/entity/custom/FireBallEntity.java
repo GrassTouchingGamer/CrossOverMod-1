@@ -77,7 +77,7 @@ public class FireBallEntity extends ThrowableProjectile {
         damage.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 5.0F);
         entity.setSecondsOnFire(5); }
         this.discard();
-        this.playSound(this.soundEvent2, 1.0F, 1.2F);
+        this.playSound(this.soundEvent2, 1.0F, 1F);
     }
 
 

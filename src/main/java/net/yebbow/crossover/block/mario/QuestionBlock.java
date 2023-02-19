@@ -26,7 +26,7 @@ public class QuestionBlock extends BaseEntityBlock {
     }
 
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
 
     }
 
@@ -36,10 +36,9 @@ public class QuestionBlock extends BaseEntityBlock {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
             if (blockentity instanceof QuestionBlockEntity) {
                 QuestionBlockEntity questionBlockEntity = (QuestionBlockEntity) blockentity;
-                ((QuestionBlockEntity) blockentity).animated();
                 ItemStack itemstack = questionBlockEntity.getStack();
                 if (!itemstack.isEmpty()) {
-                    if(!itemstack.is(ModItems.COIN.get())) {
+                    if (!itemstack.is(ModItems.COIN.get())) {
                         this.summonitementity(pLevel, pPos);
                         questionBlockEntity.clearContent();
                         pLevel.setBlockAndUpdate(pPos, ModBlocks.EMPTY_BLOCK.get().defaultBlockState());
@@ -95,6 +94,10 @@ public class QuestionBlock extends BaseEntityBlock {
         if (!pState.is(pNewState.getBlock())) {
             this.dropitem(pLevel, pPos);
         }
+    }
+
+        public void animated(boolean animate) {
+
     }
 
     public void setStack(LevelAccessor pLevel, BlockPos pPos, ItemStack pStack) {

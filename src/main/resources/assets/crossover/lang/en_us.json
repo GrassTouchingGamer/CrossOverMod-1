@@ -12,6 +12,11 @@
   "item.crossover.top_g_music_disc": "What Color Is Your Music Disc?",
   "item.crossover.top_g_music_disc.desc": "Indila - Tourner Dans Le Vide",
 
+  "item.crossover.cigar": "Cigar",
+  "item.crossover.weight": "Weight",
+
+  "itemGroup.super_mario": "Super Mario",
+
   "entity.crossover.goomba": "Goomba",
   "entity.crossover.fireball": "FireBall"
 }
