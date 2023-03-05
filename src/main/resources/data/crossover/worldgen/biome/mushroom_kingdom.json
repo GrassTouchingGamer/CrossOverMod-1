@@ -1,0 +1,24 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.4,
+  "precipitation": "rain",
+  "category": "plains",
+  "creature_spawn_probability": 0.5,
+  "effects": {
+    "sky_color": 7907327,
+    "fog_color": 2312581,
+    "water_color": 4159204,
+    "water_fog_color": 3130566,
+    "grass_color": 3069217,
+    "music": {
+      "sound": "crossover:mushroom.kingdom",
+      "min_delay": 0,
+      "max_delay": 0,
+      "replace_current_music": true
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {},
+  "features": []
+}

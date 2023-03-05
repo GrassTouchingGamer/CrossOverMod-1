@@ -1,5 +1,5 @@
 {
-  //"variants": {
+  "variants": {
   //  "facing=up": { "model": "crossover:block/warp_pipe"},
   //  "facing=north": { "model": "crossover:block/warp_pipe", "x": 90 },
   //  "facing=east": { "model": "crossover:block/warp_pipe", "x": 90 , "y": 90 },
@@ -8,4 +8,5 @@
   //  "facing=down": { "model": "crossover:block/warp_pipe", "x": 180}
   //}
   "": { "model": "crossover:block/warp_pipe" }
+   }
 }

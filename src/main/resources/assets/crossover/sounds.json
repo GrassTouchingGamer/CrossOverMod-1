@@ -90,6 +90,13 @@
         "stream": true
       }
     ]
+  },
+  "mushroom.kingdom": {
+    "sounds": [{
+        "name": "crossover:music/mario/mushroom_kingdom",
+        "stream": true
+      }
+    ]
   }
 
 }
