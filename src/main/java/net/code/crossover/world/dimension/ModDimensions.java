@@ -11,7 +11,7 @@ public class ModDimensions {
     public static final ResourceKey<Level> MARIO_WORLD_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY,
             new ResourceLocation(Crossovermod.MOD_ID, "mario_world"));
     public static final ResourceKey<DimensionType> MARIO_WORLD =
-            ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, MARIO_WORLD_KEY.getRegistryName());
+            ResourceKey.create(Registry.DIMENSION_TYPE_REGISTRY, new  ResourceLocation(Crossovermod.MOD_ID, "mario_world"));
 
     public static void register() {
         System.out.println("Registering ModDimensions for " + Crossovermod.MOD_ID);

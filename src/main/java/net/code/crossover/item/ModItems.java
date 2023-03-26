@@ -26,8 +26,8 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntityTypes.GOOMBA, 0x948e8d, 0x3b3635,
                     new Item.Properties().tab(ModCreativeModeTab.MARIO)));
 
-    public static final RegistryObject<Item> TOPG_DISC = ITEMS.register("top_g_music_disc",
-            () -> new RecordItem(15, ModSounds.TOP_G, new Item.Properties().stacksTo(1)));
+   // public static final RegistryObject<Item> TOPG_DISC = ITEMS.register("top_g_music_disc",
+   //         () -> new RecordItem(15, ModSounds.TOP_G, new Item.Properties().stacksTo(1))
 
     public static final RegistryObject<Item> COIN = ITEMS.register("coin",
             () -> new CoinItem(new Item.Properties().tab(ModCreativeModeTab.MARIO)));

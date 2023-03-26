@@ -7,17 +7,17 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class CoinItemModel extends AnimatedGeoModel<CoinItem> {
     @Override
-    public ResourceLocation getModelLocation(CoinItem object) {
+    public ResourceLocation getModelResource(CoinItem object) {
         return new ResourceLocation(Crossovermod.MOD_ID, "geo/coin.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CoinItem object) {
+    public ResourceLocation getTextureResource(CoinItem object) {
         return new ResourceLocation(Crossovermod.MOD_ID, "textures/item/coin.png");
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(CoinItem animatable) {
+    public ResourceLocation getAnimationResource(CoinItem animatable) {
         return new ResourceLocation(Crossovermod.MOD_ID, "animations/coin.animation.json");
     }
 }

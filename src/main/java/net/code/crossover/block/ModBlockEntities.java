@@ -10,7 +10,7 @@ import net.code.crossover.block.mario.entity.QuestionBlockEntity;
 
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Crossovermod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Crossovermod.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<QuestionBlockEntity>> QUESTION_BLOCK =
             BLOCK_ENTITIES.register("question_block", () -> BlockEntityType.Builder.of(QuestionBlockEntity::new, ModBlocks.QUESTION_BLOCK.get()).build(null));

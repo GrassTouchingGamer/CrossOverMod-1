@@ -36,6 +36,14 @@ public class ModBlocks {
             () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.MARIO);
 
+    public static final RegistryObject<Block> MARIO_SAND_BLOCK = registerBlock("mario_sand",
+            () -> new Block(BlockBehaviour.Properties.of(Material.SAND)
+                    .strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.MARIO);
+
+    public static final RegistryObject<Block> SMOOTH_TOAD_BRICK = registerBlock("smooth_toad_brick",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(3f).requiresCorrectToolForDrops()), ModCreativeModeTab.MARIO);
+
     public static final RegistryObject<Block> QUESTION_BLOCK = registerBlock("question_block",
             () -> new QuestionBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion().sound(ModSounds.QUESTIONABLE_SOUND)),
             ModCreativeModeTab.MARIO);

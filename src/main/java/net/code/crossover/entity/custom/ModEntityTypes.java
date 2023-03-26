@@ -11,7 +11,7 @@ import net.code.crossover.Crossovermod;
 
 public class ModEntityTypes {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITIES, Crossovermod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Crossovermod.MOD_ID);
 
     public static final RegistryObject<EntityType<GoombaEntity>> GOOMBA = ENTITY_TYPES.register("goomba",
             () -> EntityType.Builder.of(GoombaEntity::new, MobCategory.MONSTER)
