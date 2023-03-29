@@ -2,9 +2,9 @@ package net.code.crossover.entity.client.fireball;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
+import net.code.crossover.Crossovermod;
+import net.code.crossover.entity.custom.FireBallEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -14,8 +14,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.code.crossover.Crossovermod;
-import net.code.crossover.entity.custom.FireBallEntity;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class FireBallRenderer extends EntityRenderer<FireBallEntity> {
@@ -32,21 +32,21 @@ public class FireBallRenderer extends EntityRenderer<FireBallEntity> {
         return 15;
     }
 
-    public void render(FireBallEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
-        pMatrixStack.pushPose();
-        pMatrixStack.scale(.5F, .5F, .5F);
-        pMatrixStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-        pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-        PoseStack.Pose posestack$pose = pMatrixStack.last();
+    public void render(FireBallEntity p_114080_, float p_114081_, float p_114082_, PoseStack p_114083_, MultiBufferSource p_114084_, int p_114085_) {
+        p_114083_.pushPose();
+        p_114083_.scale(.5F, .5F, .5F);
+        p_114083_.mulPose(this.entityRenderDispatcher.cameraOrientation());
+        p_114083_.mulPose(Axis.YP.rotationDegrees(180.0F));
+        PoseStack.Pose posestack$pose = p_114083_.last();
         Matrix4f matrix4f = posestack$pose.pose();
         Matrix3f matrix3f = posestack$pose.normal();
-        VertexConsumer vertexconsumer = pBuffer.getBuffer(RENDER_TYPE);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 0, 0, 1);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 0, 1, 1);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 1.0F, 1, 1, 0);
-        vertex(vertexconsumer, matrix4f, matrix3f, pPackedLight, 0.0F, 1, 0, 0);
-        pMatrixStack.popPose();
-        super.render(pEntity, pEntityYaw, pPartialTicks, pMatrixStack, pBuffer, pPackedLight);
+        VertexConsumer vertexconsumer = p_114084_.getBuffer(RENDER_TYPE);
+        vertex(vertexconsumer, matrix4f, matrix3f, p_114085_, 0.0F, 0, 0, 1);
+        vertex(vertexconsumer, matrix4f, matrix3f, p_114085_, 1.0F, 0, 1, 1);
+        vertex(vertexconsumer, matrix4f, matrix3f, p_114085_, 1.0F, 1, 1, 0);
+        vertex(vertexconsumer, matrix4f, matrix3f, p_114085_, 0.0F, 1, 0, 0);
+        p_114083_.popPose();
+        super.render(p_114080_, p_114081_, p_114082_, p_114083_, p_114084_, p_114085_);
     }
 
     private static void vertex(VertexConsumer p_114090_, Matrix4f p_114091_, Matrix3f p_114092_, int p_114093_, float p_114094_, int p_114095_, int p_114096_, int p_114097_) {

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "crossover:block/green_warp_pipe",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "crossover:block/green_warp_pipe",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "crossover:block/green_warp_pipe",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "crossover:block/green_warp_pipe",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "crossover:block/green_warp_pipe"
+    },
+    "facing=west": {
+      "model": "crossover:block/green_warp_pipe",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

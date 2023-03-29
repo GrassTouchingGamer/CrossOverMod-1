@@ -9,28 +9,26 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.code.crossover.Crossovermod;
 import net.code.crossover.entity.custom.ModEntityTypes;
-import net.code.crossover.item.custom.mario.CoinItem;
 import net.code.crossover.item.custom.mario.FireFlowerItem;
 import net.code.crossover.item.custom.matrix.CigarItem;
 import net.code.crossover.item.custom.matrix.WeightItem;
-import net.code.sound.ModSounds;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Crossovermod.MOD_ID);
 
   public static final RegistryObject<Item> FIRE_FLOWER = ITEMS.register("fire_flower",
-          () -> new FireFlowerItem(new Item.Properties().tab(ModCreativeModeTab.MARIO).stacksTo(1).durability(128)));
+          () -> new FireFlowerItem(new Item.Properties().stacksTo(1).durability(128)));
 
     public static final RegistryObject<ForgeSpawnEggItem> GOOMBA_SPAWN_EGG = ITEMS.register("goomba_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntityTypes.GOOMBA, 0x948e8d, 0x3b3635,
-                    new Item.Properties().tab(ModCreativeModeTab.MARIO)));
+                    new Item.Properties()));
 
    // public static final RegistryObject<Item> TOPG_DISC = ITEMS.register("top_g_music_disc",
    //         () -> new RecordItem(15, ModSounds.TOP_G, new Item.Properties().stacksTo(1))
 
     public static final RegistryObject<Item> COIN = ITEMS.register("coin",
-            () -> new CoinItem(new Item.Properties().tab(ModCreativeModeTab.MARIO)));
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CIGAR = ITEMS.register("cigar",
             () -> new CigarItem(new Item.Properties()));
 

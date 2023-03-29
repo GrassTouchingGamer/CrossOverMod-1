@@ -1,10 +1,10 @@
 package net.code.crossover.entity.custom;
 
+import net.code.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.code.sound.ModSounds;
 
 public class FireBallEntity extends ThrowableProjectile {
 
@@ -72,7 +71,7 @@ public class FireBallEntity extends ThrowableProjectile {
         super.onHitEntity(damage);
         Entity entity = damage.getEntity();
         if (!entity.fireImmune()) {
-        damage.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 5.0F);
+            damage.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 5.0F);
         entity.setSecondsOnFire(5); }
         this.discard();
         this.playSound(this.soundEvent2, 1.0F, 1F);

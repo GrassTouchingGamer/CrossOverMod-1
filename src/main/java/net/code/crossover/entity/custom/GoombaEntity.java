@@ -1,5 +1,6 @@
 package net.code.crossover.entity.custom;
 
+import net.code.sound.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -13,19 +14,12 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.code.sound.ModSounds;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
 
 
-public class GoombaEntity extends Monster implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
-    private AnimationData data;
+public class GoombaEntity extends Monster implements GeoEntity {
 
     public GoombaEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -80,28 +74,14 @@ public class GoombaEntity extends Monster implements IAnimatable {
 
     /* ANIMATIONS */
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.walk", true));
-            return PlayState.CONTINUE;
-        }
-        if (isSprinting()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.run", true));
-            return PlayState.CONTINUE;
-        }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.goomba.idle", true));
-        return PlayState.CONTINUE;
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller",
-                0, this::predicate));
-    }
-
-    @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return null;
     }
 }

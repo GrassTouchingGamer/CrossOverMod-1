@@ -1,0 +1,7 @@
+{
+  "parent": "crossover:block/warp_pipe",
+  "textures": {
+    "0": "crossover:block/warp_pipe/green",
+    "particle": "crossover:block/warp_pipe/green"
+  }
+}

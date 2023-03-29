@@ -33,11 +33,9 @@ public class ModSounds{
     public static final ForgeSoundType QUESTIONABLE_SOUND = new ForgeSoundType(1.0F, 1.0F,
             ModSounds.QUESTION_BUMP, ModSounds.QUESTION_STEP, ModSounds.NULL, ModSounds.NULL, ModSounds.QUESTION_BUMP);
 
-    private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
-        ResourceLocation id = new ResourceLocation(Crossovermod.MOD_ID, name);
-        return SOUND_EVENTS.register(name, () -> new SoundEvent(id));
-    }
-        public static void register (IEventBus eventBus) {
+    private static RegistryObject<SoundEvent> registerSoundEvent(String path) {
+        return SOUND_EVENTS.register(path, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Crossovermod.MOD_ID, path)));
+    }        public static void register (IEventBus eventBus) {
             SOUND_EVENTS.register(eventBus);
         }
 

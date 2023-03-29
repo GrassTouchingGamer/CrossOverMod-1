@@ -1,9 +1,9 @@
 package net.code.crossover;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.code.crossover.item.ModCreativeModeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,7 +20,7 @@ import net.code.crossover.item.ModItems;
 import net.code.crossover.world.dimension.ModDimensions;
 import net.code.sound.ModSounds;
 import org.slf4j.Logger;
-import software.bernie.geckolib3.GeckoLib;
+import software.bernie.geckolib.GeckoLib;
 
 import java.util.stream.Collectors;
 
@@ -85,6 +85,17 @@ public class Crossovermod {
         LOGGER.info("HELLO from server starting");
     }
 
+    private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if(event.getTab() == ModCreativeModeTabs.MARIO_TAB) {
+            event.accept(ModItems.COIN);
+            event.accept(ModItems.FIRE_FLOWER);
+            event.accept(ModBlocks.MARIO_DIRT_BLOCK);
+            event.accept(ModBlocks.MARIO_GRASS_BLOCK);
+            event.accept(ModBlocks.MARIO_SAND_BLOCK);
+            event.accept(ModBlocks.EMPTY_BLOCK);
+            event.accept(ModBlocks.QUESTION_BLOCK);
+        }
+    }
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
 

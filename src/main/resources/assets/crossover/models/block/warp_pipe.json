@@ -1,10 +1,5 @@
 {
-	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "crossover:block/green",
-		"1": "crossover:block/hole",
-		"particle": "crossover:block/green"
-	},
+	"credit": "Let's A Go",
 	"elements": [
 		{
 			"name": "floor",
@@ -15,7 +10,7 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#0"},
-				"up": {"uv": [0, 0, 1, 1], "rotation": 270, "texture": "#1"},
+				"up": {"uv": [0, 0, 1, 1], "rotation": 270, "texture": "#0"},
 				"down": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#0"}
 			}
 		},

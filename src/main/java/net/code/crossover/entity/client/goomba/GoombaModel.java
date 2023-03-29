@@ -3,9 +3,9 @@ package net.code.crossover.entity.client.goomba;
 import net.minecraft.resources.ResourceLocation;
 import net.code.crossover.Crossovermod;
 import net.code.crossover.entity.custom.GoombaEntity;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.model.GeoModel;
 
-public class GoombaModel extends AnimatedGeoModel<GoombaEntity> {
+public class GoombaModel extends GeoModel<GoombaEntity> {
 
     @Override
     public ResourceLocation getModelResource(GoombaEntity object) {
