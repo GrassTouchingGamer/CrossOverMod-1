@@ -3,7 +3,7 @@ package net.code.crossover.block;
 import net.code.crossover.Crossovermod;
 import net.code.crossover.block.mario.EmptyBlock;
 import net.code.crossover.block.mario.QuestionBlock;
-import net.code.crossover.block.mario.portalwarppipe;
+import net.code.crossover.block.mario.WarpPipeBlock;
 import net.code.crossover.item.ModItems;
 import net.code.sound.ModSounds;
 import net.minecraft.world.item.BlockItem;
@@ -49,7 +49,7 @@ public class ModBlocks {
             () -> new EmptyBlock(BlockBehaviour.Properties.of(Material.METAL).strength(5.1f, 5f).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> WARP_PIPE_GREEN = registerBlock("green_warp_pipe",
-            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()));
+            () -> new WarpPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

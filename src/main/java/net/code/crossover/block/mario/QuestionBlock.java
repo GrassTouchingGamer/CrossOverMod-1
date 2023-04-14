@@ -22,7 +22,7 @@ public class QuestionBlock extends BaseEntityBlock {
         super(properties);
     }
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return ModBlockEntities.QUESTION_BLOCK.get().create(pPos, pState);
+        return ModBlockEntities.QUESTION_BLOCK_ENTITY.get().create(pPos, pState);
     }
 
     public RenderShape getRenderShape(BlockState pState) {
@@ -96,9 +96,6 @@ public class QuestionBlock extends BaseEntityBlock {
         }
     }
 
-        public void animated(boolean animate) {
-
-    }
 
     public void setStack(LevelAccessor pLevel, BlockPos pPos, ItemStack pStack) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);

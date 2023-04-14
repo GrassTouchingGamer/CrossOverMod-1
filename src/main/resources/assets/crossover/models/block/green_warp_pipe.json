@@ -2,6 +2,7 @@
   "parent": "crossover:block/warp_pipe",
   "textures": {
     "0": "crossover:block/warp_pipe/green",
+    "1": "crossover:block/warp_pipe/warp_hole",
     "particle": "crossover:block/warp_pipe/green"
   }
 }

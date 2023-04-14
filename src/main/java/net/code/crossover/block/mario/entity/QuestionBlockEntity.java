@@ -14,7 +14,7 @@ public class QuestionBlockEntity extends BlockEntity implements Clearable {
     private ItemStack stack = ItemStack.EMPTY;
 
     public QuestionBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
-        super(ModBlockEntities.QUESTION_BLOCK.get(), pWorldPosition, pBlockState);
+        super(ModBlockEntities.QUESTION_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     protected void saveAdditional(CompoundTag pTag) {

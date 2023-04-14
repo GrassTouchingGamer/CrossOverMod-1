@@ -26,16 +26,7 @@ public class FireFlowerItem extends Item {
             itemstack.hurtAndBreak(1, player, (p_41288_) -> {
                 p_41288_.broadcastBreakEvent(hand);
             });
-
         }
-
-
-
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
-
     }
-
-
-
-
 }

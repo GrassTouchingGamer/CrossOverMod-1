@@ -22,6 +22,7 @@
       "model": "crossover:block/green_warp_pipe"
     },
     "facing=west": {
+
       "model": "crossover:block/green_warp_pipe",
       "x": 90,
       "y": 270

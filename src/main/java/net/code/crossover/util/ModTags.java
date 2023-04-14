@@ -9,12 +9,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
+
     public static class Blocks {
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(Crossovermod.MOD_ID, name));
         }
-
+    //    public static final TagKey<Block> WARP_PIPES =
+    //            tag("warp_pipes");
         private static TagKey<Block> forgeTag(String name) {
             return BlockTags.create(new ResourceLocation("forge", name));
         }
