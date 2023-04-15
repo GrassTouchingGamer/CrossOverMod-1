@@ -31,25 +31,25 @@ public class Crossovermod {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public Crossovermod()
-    {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public Crossovermod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
 
-        ModBlocks.register(eventBus);
-        ModItems.register(eventBus);
-        ModEntityTypes.register(eventBus);
-        ModSounds.register(eventBus);
-        ModBlockEntities.register(eventBus);
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
+        ModSounds.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModDimensions.register();
 
         GeckoLib.initialize();
 
-        eventBus.addListener(this::setup);
+        modEventBus.addListener(this::setup);
+        MinecraftForge.EVENT_BUS.register(this);
 
 
 
@@ -86,7 +86,7 @@ public class Crossovermod {
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event) {
-        if(event.getTab() == ModCreativeModeTabs.MARIO_TAB) {
+        if (event.getTab() == ModCreativeModeTabs.MARIO_TAB) {
             event.accept(ModItems.COIN);
             event.accept(ModItems.FIRE_FLOWER);
             event.accept(ModBlocks.MARIO_DIRT_BLOCK);
@@ -94,6 +94,7 @@ public class Crossovermod {
             event.accept(ModBlocks.MARIO_SAND_BLOCK);
             event.accept(ModBlocks.EMPTY_BLOCK);
             event.accept(ModBlocks.QUESTION_BLOCK);
+            event.accept(ModBlocks.WARP_PIPE_GREEN);
         }
     }
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
