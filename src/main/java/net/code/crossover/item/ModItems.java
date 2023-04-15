@@ -1,5 +1,6 @@
 package net.code.crossover.item;
 
+import net.code.crossover.item.custom.mario.WarpConnectorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.RecordItem;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -24,7 +25,7 @@ public class ModItems {
     public static final RegistryObject<Item> COIN = ITEMS.register("coin",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WARP_CONNECTOR = ITEMS.register("warp_connecter",
-            () -> new Item(new Item.Properties()));
+            () -> new WarpConnectorItem(new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

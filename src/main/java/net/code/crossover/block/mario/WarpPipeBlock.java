@@ -1,18 +1,15 @@
 package net.code.crossover.block.mario;
 
 import net.code.crossover.block.ModBlockEntities;
-import net.code.crossover.block.ModBlocks;
 import net.code.crossover.block.mario.entity.WarpPipeBlockEntity;
+import net.code.crossover.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,7 +25,6 @@ import java.util.stream.Stream;
 import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 public class WarpPipeBlock extends BaseEntityBlock {
-    static WarpPipeBlock warpPipeBlock;
 
 
     @Nullable
@@ -118,21 +114,21 @@ public class WarpPipeBlock extends BaseEntityBlock {
         }
     }
 
-    public static boolean canEnter(Level pLevel, BlockPos blockPos, WarpPipeBlock warpPipeBlock) {
-        if (!pLevel.getBlockState(blockPos).is(warpPipeBlock))
+    public static boolean canEnter(Level pLevel, BlockPos blockPos) {
+        if (!pLevel.getBlockState(blockPos).is(ModTags.Blocks.WARP_PIPES))
             return false;
         return pLevel.getBlockState(blockPos).getValue(LINKED);
     }
 
-    public static boolean isLinkable(Level pLevel, BlockPos blockPos, WarpPipeBlock warpPipeBlock) {
-        if (!pLevel.getBlockState(blockPos).is(warpPipeBlock))
+    public static boolean isLinkable(Level pLevel, BlockPos blockPos) {
+        if (!pLevel.getBlockState(blockPos).is(ModTags.Blocks.WARP_PIPES))
             return false;
         return !pLevel.getBlockState(blockPos).getValue(LINKED);
     }
 
-    public void checkConnection(Level level, BlockPos pPos, BlockState pState, WarpPipeBlock warpPipeBlock) {
+    public void checkConnection(Level level, BlockPos pPos, BlockState pState) {
         if (level.getBlockEntity(pPos) instanceof WarpPipeBlockEntity pipeBlockEntity) {
-            if (pipeBlockEntity.destination == null || !level.getBlockState(pipeBlockEntity.destination).is(warpPipeBlock)) {
+            if (pipeBlockEntity.destination == null || !level.getBlockState(pipeBlockEntity.destination).is(ModTags.Blocks.WARP_PIPES)) {
                 level.setBlockAndUpdate(pPos, pState.setValue(LINKED, false));
                 pipeBlockEntity.destination = null;
             }
@@ -147,14 +143,19 @@ public class WarpPipeBlock extends BaseEntityBlock {
         }
     }
 
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
     public void onPlace(BlockState state, Level level, BlockPos blockPos, BlockState oldState ,boolean remind) {
         super.onPlace(state, level, blockPos, oldState ,remind);
             if (state.getValue(LINKED)) {
-                this.checkConnection(level, blockPos, state, warpPipeBlock);
+                this.checkConnection(level, blockPos, state);
             }
         }
 
-    public boolean triggerevent(BlockState state, Level level, BlockPos blockPos, int type, int data) {
+    public boolean triggerEvent(BlockState state, Level level, BlockPos blockPos, int type, int data) {
         super.triggerEvent(state, level, blockPos, type, data);
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity == null) {

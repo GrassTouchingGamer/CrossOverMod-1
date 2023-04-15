@@ -23,8 +23,9 @@ import org.slf4j.Logger;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.MAX_DISTANCE;
+
 public class WarpConnectorItem extends Item {
-    WarpPipeBlock warpPipeBlock;
     private static final String POS_KEY = "PipePos";
     private static final String DIMENSION_KEY = "PipeDimension";
     private static final Logger LOGGER = LogUtils.getLogger();
@@ -47,18 +48,12 @@ public class WarpConnectorItem extends Item {
         Optional<ResourceKey<net.minecraft.world.level.Level>> optional;
         boolean b1 = tag.contains(POS_KEY);
         boolean b2 = tag.contains(DIMENSION_KEY);
-        if (b1 && b2 && (optional = WarpConnectorItem.get(tag)).isPresent()) {
+        if (b1 && b2 && (optional = WarpConnectorItem.getDimension(tag)).isPresent()) {
             BlockPos blockPos = NbtUtils.readBlockPos(tag.getCompound(POS_KEY));
             return GlobalPos.of(optional.get(), blockPos);
         }
         return null;
     }
-
-    private static Optional<ResourceKey<Level>>  get(CompoundTag tag) {
-        return get(tag);
-    }
-
-
     private InteractionResult reset(Level pLevel, BlockPos blockPos, CompoundTag pTag, boolean Break) {
         pTag.remove(POS_KEY);
         pTag.remove(DIMENSION_KEY);
@@ -73,27 +68,33 @@ public class WarpConnectorItem extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, net.minecraft.world.level.Level level, Entity entity, int slot, boolean selected) {
+    public void inventoryTick(ItemStack pStack, Level level, Entity entity, int slot, boolean selected) {
         if (level.isClientSide) {
             return;
         }
-        if (WarpConnectorItem.isConnected(stack)) {
-            CompoundTag pTag = stack.getOrCreateTag();
-            GlobalPos globalPos = WarpConnectorItem.createWarpPos(pTag);
+        if (WarpConnectorItem.isConnected(pStack)) {
+            CompoundTag compoundTag = pStack.getOrCreateTag();
+            GlobalPos globalPos = WarpConnectorItem.createWarpPos(compoundTag);
             if (globalPos == null || !(entity instanceof Player)) return;
+            boolean bl = ((Player) entity).getOffhandItem() == pStack;
+            if (selected || bl) {
+                if (!globalPos.pos().closerThan(entity.getOnPos(), MAX_DISTANCE)) {
                     InteractionHand hand = InteractionHand.MAIN_HAND;
-                    stack.hurtAndBreak(5, (Player) entity, p -> p.broadcastBreakEvent(hand));
-                    this.reset(level, entity.getOnPos(), pTag, true);
+                    if (bl)
+                        hand = InteractionHand.OFF_HAND;
+                    InteractionHand finalHand = hand;
+                    pStack.hurtAndBreak(2, (Player) entity, p -> p.broadcastBreakEvent(finalHand));
+                    this.reset(level, entity.blockPosition(), compoundTag, true);
+                }
             }
         }
-
-    @Override
+    }    @Override
     public InteractionResult useOn(UseOnContext context) {
         BlockPos blockPos = context.getClickedPos();
         Player player = context.getPlayer();
         Level pLevel = context.getLevel();
         InteractionResult result = super.useOn(context);
-        if (WarpPipeBlock.isLinkable(pLevel, blockPos, warpPipeBlock)) {
+        if (WarpPipeBlock.isLinkable(pLevel, blockPos)) {
             ItemStack itemStack = context.getItemInHand();
             if (WarpConnectorItem.isConnected(itemStack)) {
                 CompoundTag tag = itemStack.getOrCreateTag();
@@ -106,7 +107,7 @@ public class WarpConnectorItem extends Item {
                 BlockEntity blockEntity = pLevel.getBlockEntity(blockPos);
                 BlockEntity blockEntity1 = pLevel.getBlockEntity(globalPos.pos());
                 if (blockEntity instanceof WarpPipeBlockEntity warpPipeBE && blockEntity1 instanceof WarpPipeBlockEntity warpPipeBE1) {
-                    if (WarpPipeBlock.isLinkable(pLevel, globalPos.pos(), warpPipeBlock)) {
+                    if (WarpPipeBlock.isLinkable(pLevel, globalPos.pos())) {
                         if (player != null)
                             itemStack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
                         this.link(blockPos, pLevel, tag, warpPipeBE, warpPipeBE1);
