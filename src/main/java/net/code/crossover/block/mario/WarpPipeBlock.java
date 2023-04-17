@@ -1,10 +1,17 @@
 package net.code.crossover.block.mario;
 
 import net.code.crossover.block.ModBlockEntities;
+import net.code.crossover.block.mario.entity.QuestionBlockEntity;
 import net.code.crossover.block.mario.entity.WarpPipeBlockEntity;
+import net.code.crossover.block.mario.entity.WarpShape;
 import net.code.crossover.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -14,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -114,9 +122,48 @@ public class WarpPipeBlock extends BaseEntityBlock {
         }
     }
 
+    public static void warp(Entity entity, BlockPos blockPos ,BlockState pState, Level level, WarpPipeBlockEntity warpPipeBlockEntity) {
+        level.gameEvent(GameEvent.TELEPORT, blockPos, GameEvent.Context.of(entity));
+        level.broadcastEntityEvent(entity, EntityEvent.FIREWORKS_EXPLODE);
+        BlockPos destinPos = null;
+        destinPos = warpPipeBlockEntity.destination;
+                if(!(destinPos==null)) {
+                    if (level.getBlockState(destinPos).is(ModTags.Blocks.WARP_PIPES)) {
+                        if (level.getBlockState(destinPos).getValue(FACING) == Direction.UP) {
+                            entity.teleportTo(destinPos.getX() + .5, destinPos.getY() + 1, destinPos.getZ() + .5);
+                        } else {
+                            entity.teleportTo(destinPos.getX() + .5, destinPos.getY() + 10, destinPos.getZ() + .5);
+                        }
+                    } else {
+                        level.setBlockAndUpdate(blockPos, pState.setValue(LINKED, false));
+                    }
+                }
+    }
+    public void tick(BlockState blockState, ServerLevel p_222544_, BlockPos p_222545_, RandomSource p_222546_) {
+        if (!blockState.canSurvive(p_222544_, p_222545_)) {
+            p_222544_.destroyBlock(p_222545_, true);
+        }
+
+    }
+
+
+    public void entityInside(BlockState blockState, Level pLevel, BlockPos blockPos, Entity entity) {
+        BlockEntity blockentity = pLevel.getBlockEntity(blockPos);
+        WarpPipeBlockEntity warpPipeBlockEntity = (WarpPipeBlockEntity) blockentity;
+        if (pLevel.getExistingBlockEntity(blockPos) instanceof WarpPipeBlockEntity) {
+          if (WarpPipeBlockEntity.entityTeleport(pLevel, blockPos, blockState, entity, (WarpPipeBlockEntity)blockentity)) {
+              this.warp(entity, blockPos, blockState, pLevel, warpPipeBlockEntity);
+          };
+        }
+    }
+
+
     public static boolean canEnter(Level pLevel, BlockPos blockPos) {
-        if (!pLevel.getBlockState(blockPos).is(ModTags.Blocks.WARP_PIPES))
-            return false;
+        if (!pLevel.getBlockState(blockPos).is(ModTags.Blocks.WARP_PIPES)) {
+            if(!pLevel.getBlockState(blockPos).getValue(LINKED)) {
+                return false;
+            }
+        }
         return pLevel.getBlockState(blockPos).getValue(LINKED);
     }
 
@@ -134,14 +181,14 @@ public class WarpPipeBlock extends BaseEntityBlock {
             }
         }
     }
-
-    public static void warp(Player player, BlockPos blockPos, Direction direction) {
-        if(direction==Direction.NORTH) {
-            player.teleportTo(blockPos.getX() + 0.5, blockPos.getY() + 1.0, blockPos.getZ() + 0.5);
-        } else {
-            player.teleportTo(blockPos.getX() - 0.5, blockPos.getY() - 1.0, blockPos.getZ() - 0.5);
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos blockPos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        if (state.getValue(LINKED)) {
+            this.checkConnection(level, blockPos, state);
         }
+        super.neighborChanged(state, level, blockPos, sourceBlock, sourcePos, notify);
     }
+
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {

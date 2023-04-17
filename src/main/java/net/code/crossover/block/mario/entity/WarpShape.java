@@ -1,6 +1,7 @@
 package net.code.crossover.block.mario.entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -10,8 +11,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.stream.Stream;
-public interface WarpPipe {
-    public static final DirectionProperty WARPSHAPE = BlockStateProperties.FACING;
+public interface WarpShape {
+    DirectionProperty WARPSHAPE = BlockStateProperties.FACING;
 
 
     VoxelShape WARP_UP = Stream.of(Block.box(1, 15, 1, 16, 15, 15)
@@ -26,7 +27,7 @@ public interface WarpPipe {
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
 
-    default VoxelShape getWarpShape(BlockState pState) {
+      default VoxelShape getWarpShape(BlockState pState) {
         switch (pState.getValue(WARPSHAPE)) {
             case UP:
                 return WARP_UP;

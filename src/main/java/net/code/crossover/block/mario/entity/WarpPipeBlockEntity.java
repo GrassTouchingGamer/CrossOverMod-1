@@ -6,16 +6,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class WarpPipeBlockEntity extends BlockEntity implements WarpPipe {
+import static net.minecraft.world.level.block.entity.HopperBlockEntity.addItem;
+
+public class WarpPipeBlockEntity extends BlockEntity implements WarpShape {
 
     private static final String DESTINATION = "Destination";
     @Nullable
@@ -24,23 +26,31 @@ public class WarpPipeBlockEntity extends BlockEntity implements WarpPipe {
         super(ModBlockEntities.WARP_PIPE_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
-        public static List<Entity> getEntities(Level level, WarpPipe warp, BlockState pState) {
-            return warp.getWarpShape(pState).toAabbs().stream().flatMap((p_155558_) -> {
-                return level.getEntitiesOfClass(Entity.class, p_155558_.move(warp.getLevelX() - 0.5D, warp.getLevelY() - 0.5D, warp.getLevelZ() - 0.5D), EntitySelector.LIVING_ENTITY_STILL_ALIVE).stream();
-            }).collect(Collectors.toList());
-        }
-
     private boolean hasDestination() {
         return this.destination != null;
     }
 
-        public void setDestination(@Nullable BlockPos pPos) {
+    public void setDestination(@Nullable BlockPos pPos) {
         this.destination = pPos;
         if (this.level != null) {
             BlockState blockState = this.getBlockState();
             this.level.setBlockAndUpdate(this.getBlockPos(), blockState.setValue(WarpPipeBlock.LINKED, destination != null));
         }
     }
+
+    public static boolean addEntity(Entity entity) {
+        boolean flag = false;
+        entity.getPose();
+        return flag;
+    }
+
+
+    public static boolean entityTeleport(Level level, BlockPos pPos, BlockState pState, Entity entity, WarpPipeBlockEntity warpPipeBlock) {
+        if (entity instanceof Entity && Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox()), warpPipeBlock.getWarpShape(pState), BooleanOp.AND)) {
+                return addEntity(entity);};
+        return true;
+    }
+
 
     @Override
     public void readCompound(CompoundTag tag) {
