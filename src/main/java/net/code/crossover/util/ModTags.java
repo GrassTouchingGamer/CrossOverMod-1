@@ -17,6 +17,8 @@ public class ModTags {
         }
        public static final TagKey<Block> WARP_PIPES =
                tag("warp_pipes");
+       public static final TagKey<Block> WARP_PASSES =
+               tag("warp_passes");
         private static TagKey<Block> forgeTag(String name) {
             return BlockTags.create(new ResourceLocation("forge", name));
         }

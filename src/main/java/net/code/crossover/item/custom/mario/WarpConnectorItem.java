@@ -23,12 +23,15 @@ import org.slf4j.Logger;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.MAX_DISTANCE;
 
 public class WarpConnectorItem extends Item {
+
     private static final String POS_KEY = "PipePos";
     private static final String DIMENSION_KEY = "PipeDimension";
     private static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final int MAX_WARP_DISTANCE = 5000;
+
 
     public WarpConnectorItem(Properties properties) {
         super(properties);
@@ -78,7 +81,7 @@ public class WarpConnectorItem extends Item {
             if (globalPos == null || !(entity instanceof Player)) return;
             boolean bl = ((Player) entity).getOffhandItem() == pStack;
             if (selected || bl) {
-                if (!globalPos.pos().closerThan(entity.getOnPos(), MAX_DISTANCE)) {
+                if (!globalPos.pos().closerThan(entity.getOnPos(), MAX_WARP_DISTANCE)) {
                     InteractionHand hand = InteractionHand.MAIN_HAND;
                     if (bl)
                         hand = InteractionHand.OFF_HAND;
@@ -129,4 +132,5 @@ public class WarpConnectorItem extends Item {
         nbt.put(POS_KEY, NbtUtils.writeBlockPos(pos));
         Level.RESOURCE_KEY_CODEC.encodeStart(NbtOps.INSTANCE, worldKey).resultOrPartial(LOGGER::error).ifPresent(nbtElement -> nbt.put(DIMENSION_KEY, nbtElement));
     }
+
 }

@@ -1,6 +1,8 @@
 package net.code.crossover.block.mario.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,12 +14,11 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.stream.Stream;
 public interface WarpShape {
-    DirectionProperty WARPSHAPE = BlockStateProperties.FACING;
 
 
-    VoxelShape WARP_UP = Stream.of(Block.box(1, 15, 1, 16, 15, 15)
+    VoxelShape WARP_UP = Stream.of(Block.box(1, 15, 1, 15, 16, 15)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-    VoxelShape WARP_NORTH = Stream.of(Block.box(1, 15, 1, 16, 15, 15)
+    VoxelShape WARP_NORTH = Stream.of(Block.box(0, 0, 0, 0, 0, 0)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     VoxelShape WARP_EAST = Stream.of(Block.box(1, 2, 2, 3, 13, 14)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
@@ -26,32 +27,14 @@ public interface WarpShape {
     VoxelShape WARP_WEST = Stream.of(Block.box(13, 2, 2, 15, 13, 14)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-
-      default VoxelShape getWarpShape(BlockState pState) {
-        switch (pState.getValue(WARPSHAPE)) {
-            case UP:
+    default VoxelShape getWarpUp() {
                 return WARP_UP;
-            case NORTH:
+    }
+      default VoxelShape getWarpNorth() {
                 return WARP_NORTH;
-            case EAST:
-                return WARP_EAST;
-            case SOUTH:
-                return WARP_SOUTH;
-            case WEST:
-                return WARP_WEST;
-            default:
-                return WARP_UP;
-        }
     }
 
     void readCompound(CompoundTag tag);
 
     void writeCompound(CompoundTag tag);
-
-    double getLevelX();
-
-    double getLevelY();
-
-    double getLevelZ();
-
 }

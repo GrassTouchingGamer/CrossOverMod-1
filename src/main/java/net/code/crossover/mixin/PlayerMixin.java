@@ -26,29 +26,4 @@ public abstract class PlayerMixin extends LivingEntity {
     protected PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
         super(entityType, level);
     }
-
-    private void PipeTeleportation(WarpShape warpShape, Direction direction) {
-        if (this.getWarpCooldown() != 0) return;
-        BlockPos originPos = null;
-        if (WarpPipeBlock.canEnter(level, blockPosition())) originPos = blockPosition();
-        if (originPos != null) {
-            this.warpToPipe(originPos, warpShape, direction);
-        }
-    }
-
-    private void warpToPipe(BlockPos originPos, WarpShape warpShape, Direction direction) {
-        BlockPos destinPos = null;
-        BlockEntity blockEntity = level.getBlockEntity(originPos);
-        if (blockEntity instanceof WarpPipeBlockEntity warpPipeBE) {
-            destinPos = warpPipeBE.destination;
-        }
-    }
-
-    public int getWarpCooldown() {
-        return WarpCooldown;
-    }
-
-    public void setWarpCooldown(int cooldown) {
-        this.WarpCooldown = cooldown;
-    }
 }
